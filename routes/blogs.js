@@ -40,4 +40,16 @@ router.get("/fetchBlog", async (req, res) => {
     res.status(500).json({ success: false, msg: error.message });
   }
 });
+router.get("/fetchBlog/:id", async (req, res) => {
+  try {
+    let blog = await Blogs.findById(req.params.id);
+    if (!blog) {
+      res.status(404).json({ success: false, msg: "Blogs not found" });
+    } else {
+      res.status(200).json({ success: true, blog });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, msg: error.message });
+  }
+});
 module.exports = router;
