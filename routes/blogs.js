@@ -52,4 +52,21 @@ router.get("/fetchBlog/:id", async (req, res) => {
     res.status(500).json({ success: false, msg: error.message });
   }
 });
+router.get("/fetchBlogs/search", async (req, res) => {
+  try {
+    const query = req.query.q;
+    console.log(query);
+    const results = await Blogs.find({ $text: { $search: query } });
+    if (!results) {
+      res.status(404).json({ success: false, msg: "Blogs not found" });
+    } else {
+      const query = req.query.q;
+      res
+        .status(200)
+        .json({ success: true, total: results.length, query: query, results });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, msg: error.message });
+  }
+});
 module.exports = router;

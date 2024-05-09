@@ -10,16 +10,18 @@ const blogSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  points: [{
-    title: {
-      type: String,
-      required: true,
+  points: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
     },
-    description: {
-      type: String,
-      required: true,
-    },
-  }],
+  ],
   image: {
     type: String,
     required: true,
@@ -39,5 +41,4 @@ const blogSchema = mongoose.Schema({
 });
 
 blogSchema.index({ title: "text", description: "text" });
-
 module.exports = mongoose.model("Blogs", blogSchema);
