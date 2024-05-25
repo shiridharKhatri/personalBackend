@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/blog", require("./routes/blogs"));
 app.use("/messages", require("./routes/message"));
-app.use("/img", express.static("./images"));
+app.use("/img", express.static("public"));
 connectToDb(process.env.DATABASE)
   .then(() => {
     app.listen(PORT, () => {
